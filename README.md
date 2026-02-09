@@ -4,7 +4,9 @@ This is a serverless, cloud-native resume site built on AWS with Infrastructure 
 This project demonstrates front-end hosting, CDN, API, serverless compute, database, automation, and observability.
 
 **live site**
+---
 **API endpoint**
+---
 **Architecture Diagram**
 
-## What this project demonstrates
+# What this project demonstrates
