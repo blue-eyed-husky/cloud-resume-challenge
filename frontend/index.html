@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mitchell Chhay – Resume</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <h1>Mitchell Chhay</h1>
+      <div class="contact">
+        <a href="mailto:mitchchhay@gmail.com">mitchchhay@gmail.com</a>
+        <a href="https://www.linkedin.com/in/mitchellchhay" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Blue-Eyed-Husky" target="_blank" rel="noopener">GitHub</a>
+        <span>Denver, CO</span>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="section">
+      <h2>Professional Summary</h2>
+      <p>
+        Cloud and infrastructure-focused technologist with hands-on experience designing, deploying, and operating AWS environments
+        using Terraform and CI/CD pipelines. Built production-style cloud labs emphasizing infrastructure as code, secure access via
+        IAM and SSM, automated deployments, and observability with CloudWatch/CloudTrail. Proven ability to diagnose failures across
+        networking, permissions, services, and deployment workflows, with strong documentation and operational discipline. Currently
+        expanding depth in AWS architecture and DevOps practices while leveraging a background in regulated, high-accountability environments.
+      </p>
+    </section>
+
+    <!-- Skills -->
+<section class="section">
+  <h2>Skills</h2>
+
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h3>Cloud & Infrastructure</h3>
+      <ul>
+        <li>AWS (EC2, S3, Lambda, IAM, CloudWatch, CloudTrail, SSM)</li>
+        <li>Networking (VPC, subnets, routing, security groups)</li>
+      </ul>
+    </div>
+
+    <div class="skill-block">
+      <h3>Automation & DevOps</h3>
+      <ul>
+        <li>Infrastructure as Code: Terraform</li>
+        <li>CI/CD: GitHub Actions</li>
+        <li>Linux system administration, Bash, Git</li>
+      </ul>
+    </div>
+
+    <div class="skill-block">
+      <h3>Observability & Security</h3>
+      <ul>
+        <li>Metrics, logging, alarms; log groups and centralized log shipping</li>
+        <li>IAM, hardening, least privilege</li>
+      </ul>
+    </div>
+
+    <div class="skill-block">
+      <h3>Tools</h3>
+      <ul>
+        <li>Git, Docker, VS Code</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+
+      <article class="project">
+        <div class="project-header">
+          <div class="project-title">Cloud Support Lab</div>
+          <div class="project-meta">AWS • Terraform • GitHub Actions</div>
+        </div>
+
+        <p>
+          Built a production-style AWS environment using Infrastructure as Code and operational best practices.
+          Provisioned a VPC with public subnet routing through an Internet Gateway, deployed an EC2 instance bootstrapped
+          with NGINX via user data, and managed access securely using an IAM instance role and AWS Systems Manager (SSM)
+          for remote administration (no persistent SSH dependency).
+        </p>
+
+        <ul>
+          <li><strong>Infrastructure as Code:</strong> Terraform-managed VPC, networking, security groups, EC2, and IAM role/profile.</li>
+          <li><strong>Secure Operations:</strong> SSM-based management and least-privilege IAM permissions for system access and automation.</li>
+          <li><strong>CI/CD Pipeline:</strong> GitHub Actions packages an artifact, uploads to S3, and triggers deployment via SSM Run Command.</li>
+          <li><strong>Observability:</strong> CloudWatch log groups with application/deploy logs shipping for troubleshooting and auditability; CloudTrail enabled.</li>
+          <li><strong>Incident-Driven Learning:</strong> Documented failure scenarios (e.g., IAM permission loss, service outage, deployment issues) with root cause, fix, and validation steps.</li>
+        </ul>
+
+        <p class="muted">
+          <strong>Tech:</strong> AWS (EC2, VPC, IAM, S3, SSM, CloudWatch, CloudTrail), Terraform, GitHub Actions, Bash, NGINX, Linux
+        </p>
+      </article>
+    </section>
+
+    <article class="project">
+  <div class="project-header">
+    <div class="project-title">Cloud Resume Challenge (AWS)</div>
+    <div class="project-meta">S3 • CloudFront • Lambda • DynamoDB • GitHub Actions</div>
+  </div>
+
+  <p>
+    Building a serverless resume website on AWS with automated deployments and a visitor counter.
+    Focused on secure public delivery, infrastructure-as-code patterns, and operational readiness.
+  </p>
+
+  <ul>
+    <li><strong>Frontend:</strong> Static resume site hosted on S3 and delivered via CloudFront.</li>
+    <li><strong>Backend:</strong> Visitor counter API using Lambda + DynamoDB (API Gateway optional depending on implementation).</li>
+    <li><strong>CI/CD:</strong> GitHub Actions deploys website updates and backend changes automatically.</li>
+    <li><strong>Security:</strong> Least-privilege IAM, HTTPS-only delivery, and restricted S3 access through CloudFront.</li>
+    <li><strong>Operational Practices:</strong> Logging/metrics for troubleshooting and basic reliability checks.</li>
+  </ul>
+
+  <p class="muted">
+    <strong>Tech:</strong> AWS (S3, CloudFront, Lambda, DynamoDB, IAM), GitHub Actions, HTML/CSS, JavaScript
+  </p>
+</article>
+
+    <!-- Experience -->
+    <section class="section">
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Senior Manager, Pharmacovigilance – Jobot Consulting / BioAtla</div>
+          <div class="job-date">Mar 2024 – Present</div>
+        </div>
+
+        <ul>
+          <li>Lead PV operations across case processing, signal detection, and aggregate reporting in a regulated environment.</li>
+          <li>Manage vendor selection and oversight (CROs, call centers, safety database vendors), including SLAs, quality reviews, and issue escalation.</li>
+          <li>Own safety data exchange and reconciliation processes with partners/distributors; support PV agreements and SOP development to ensure compliance and on-time delivery.</li>
+          <li>Review protocol and ICF safety content; maintain reference safety information (SmPC/IB/Core Safety Data Sheet) and track compliance metrics/CAPA actions.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div class="job-title">Manager, Pharmacovigilance – CTI BioPharma / SOBI</div>
+          <div class="job-date">Mar 2023 – Mar 2024</div>
+        </div>
+
+        <ul>
+          <li>Executed time-sensitive operational workflows for intake, validation, and reporting of safety events; ensured accuracy and adherence to defined timelines and standards.</li>
+          <li>Produced recurring deliverables and status reporting (aggregate reports and submissions), coordinating inputs across teams to meet deadlines.</li>
+          <li>Monitored compliance metrics and supported corrective actions by identifying gaps, improving procedures, and strengthening documentation.</li>
+          <li>Managed data quality controls including standardized coding (MedDRA/WHO-DD) and reconciliation between safety and clinical systems to maintain consistency.</li>
+          <li>Supported vendor/partner data exchange processes and periodic reconciliations, escalating issues and documenting resolutions for repeatability.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section">
+      <h2>Education</h2>
+      <p>Bachelor of Science in Biology – University of Colorado Denver (2012)</p>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section">
+      <h2>Certifications</h2>
+      <p>
+        AWS Certified Cloud Practitioner (2026)<br />
+        AWS Certified Solutions Architect – Associate (in progress)
+      </p>
+    </section>
+
+  </div>
+</body>
+</html>

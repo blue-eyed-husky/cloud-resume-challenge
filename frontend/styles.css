@@ -1,0 +1,195 @@
+/* ===== Design Tokens ===== */
+:root {
+  --bg: hsl(0, 1%, 32%);
+  --card: #f5edde;
+  --text: #1f2937;          /* slate-800 */
+  --header: #181919;          /* slate-800 */
+  --header2: #a0a5ac;          /* slate-800 */
+  --muted: #6b7280;         /* slate-500 */
+  --line: #5b5c5e;          /* gray-200 */
+  --accent: #5b5c5e;        /* near-black */
+  --link: #2563eb;          /* blue-600 */
+
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+  --container: 920px;
+}
+
+/* ===== Global Styles ===== */
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ===== Layout Container ===== */
+.container {
+  max-width: var(--container);
+  margin: 40px auto;
+  background: var(--card);
+  padding: 44px 44px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Better readability on large screens */
+p, li { max-width: 75ch; }
+
+/* ===== Headings ===== */
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 14px;
+  color: var(--header)
+}
+
+.section {
+  margin-top: 34px;
+}
+
+.section h2 {
+  font-size: 1.55rem;
+  color: var(--header2);
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  padding-left: 12px;
+  border-left: none;
+  border-bottom: 4px solid var(--line);
+}
+
+/* Optional: subtle divider between sections */
+.section + .section {
+  padding-top: 6px;
+}
+
+/* ===== Contact Info ===== */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 10px 0 18px;
+  color: var(--muted);
+}
+
+.contact span,
+.contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact a { color: var(--link); }
+
+/* ===== Paragraph spacing ===== */
+p {
+  margin: 10px 0 0;
+}
+
+/* ===== Experience & Projects ===== */
+.job, .project {
+  padding: 14px 0;
+}
+
+.job:last-child, .project:last-child {
+  border-bottom: none;
+}
+
+.job-header, .project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.job-title, .project-title {
+  font-weight: 650;
+  font-size: 1.05rem;
+}
+
+.job-date, .project-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* ===== Lists ===== */
+ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+li { margin: 6px 0; }
+
+/* ===== Skills layout (optional helper) ===== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 28px;
+  margin-top: 8px;
+}
+
+.skill-block h3 {
+  font-size: 1rem;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.skill-block ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+@media (max-width: 720px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 720px) {
+  .container {
+    margin: 18px auto;
+    padding: 22px 18px;
+    border-radius: 10px;
+  }
+
+  h1 { font-size: 1.75rem; }
+
+  .job-header, .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-date, .project-meta {
+    white-space: normal;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Print ===== */
+@media print {
+  body { background: #fff; }
+  .container { box-shadow: none; margin: 0; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  .job, .project { border-bottom: 1px solid #ddd; }
+}
