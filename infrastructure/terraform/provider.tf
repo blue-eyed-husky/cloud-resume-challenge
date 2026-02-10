@@ -9,6 +9,13 @@ terraform {
   }
 }
 
+# Primary
 provider "aws" {
   region = var.aws_region
+}
+
+# For ACM
+provider "aws_acm" {
+  alias  = "aws_acm"
+  region = var.aws_region_acm
 }
