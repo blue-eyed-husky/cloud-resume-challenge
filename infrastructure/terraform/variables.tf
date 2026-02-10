@@ -25,17 +25,9 @@ variable "frontend_directory" {
 variable "domain_name" {
   description = "The domain name for the website (e.g., example.com)."
   type        = string
-  default     = null
 }
 
-variable "subdomain_name" {
-  description = "The subdomain name for the website (e.g., www)."
-  type        = string
-  default     = "resume"
-}
-
-variable "ACM certificate_arn" {
+variable "acm_certificate_arn" {
   description = "The ARN of the ACM certificate for the domain."
   type        = string
-  default     = null
 }

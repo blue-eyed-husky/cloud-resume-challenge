@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 # For ACM
-provider "aws_acm" {
-  alias  = "aws_acm"
+provider "aws" {
+  alias  = "acm_east"
   region = var.aws_region_acm
 }
