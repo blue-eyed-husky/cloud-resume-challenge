@@ -114,3 +114,46 @@ resource "aws_s3_object" "resume_files" {
 
   etag = filemd5("${local.frontend_dir}/${each.value}")
 }
+
+# GitHub Deploy Permission
+data "aws_iam_policy_document" "github_deploy_permissions" {
+  # Needed for `aws s3 sync` (ListObjectsV2)
+  statement {
+    sid     = "S3ListBucket"
+    effect  = "Allow"
+    actions = ["s3:ListBucket"]
+    resources = [
+      aws_s3_bucket.resume_bucket.arn
+    ]
+  }
+
+  # Needed to upload/delete objects during sync
+  statement {
+    sid    = "S3ObjectRW"
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject",
+      "s3:PutObjectTagging",
+      "s3:DeleteObjectTagging"
+    ]
+    resources = [
+      "${aws_s3_bucket.resume_bucket.arn}/*"
+    ]
+  }
+
+  # Needed to make changes show immediately (cache invalidation)
+  statement {
+    sid     = "CloudFrontInvalidation"
+    effect  = "Allow"
+    actions = ["cloudfront:CreateInvalidation"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_role_policy" "github_deploy_inline" {
+  name   = "github-deploy-inline"
+  role   = aws_iam_role.github_deploy_role.id
+  policy = data.aws_iam_policy_document.github_deploy_permissions.json
+}
