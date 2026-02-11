@@ -30,6 +30,9 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
+          role-session-name: crc-gha-deploy
+        env: 
+          ACTIONS_STEP_DEBUG: true
 
       - name: Sync frontend to S3
         run: |
