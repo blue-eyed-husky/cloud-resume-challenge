@@ -1,4 +1,4 @@
-# Establish locals 
+# Establish locals **removed S3 website origin for better security, using CloudFront instead**
 locals {
   frontend_dir = coalesce(var.frontend_directory, "${path.module}/../../frontend")
   site_files   = fileset(local.frontend_dir, "**/*")
@@ -27,48 +27,76 @@ resource "aws_s3_bucket" "resume_bucket" {
   }
 }
 
-# Create S3 bucket policy
+# # Create S3 bucket policy
+# resource "aws_s3_bucket_policy" "resume_bucket_policy" {
+#   bucket = aws_s3_bucket.resume_bucket.id
+
+#   depends_on = [aws_s3_bucket_public_access_block.resume_bucket_public_access]
+
+#   policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Sid       = "PublicReadGetObject"
+#         Effect    = "Allow"
+#         Principal = "*"
+#         Action    = "s3:GetObject"
+#         Resource  = "${aws_s3_bucket.resume_bucket.arn}/*"
+#       }
+#     ]
+#   })
+# }
+
+# set S3 bucket policy with Cloudfront read permissions
+data "aws_iam_policy_document" "resume_bucket_policy" {
+  statement {
+    sid    = "AllowCloudFrontRead"
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.resume_bucket.arn}/*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.resume_distribution.arn]
+    }
+  }
+}
+
 resource "aws_s3_bucket_policy" "resume_bucket_policy" {
   bucket = aws_s3_bucket.resume_bucket.id
-
+  policy = data.aws_iam_policy_document.resume_bucket_policy.json
   depends_on = [aws_s3_bucket_public_access_block.resume_bucket_public_access]
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.resume_bucket.arn}/*"
-      }
-    ]
-  })
 }
 
 # Set S3 public access block
 resource "aws_s3_bucket_public_access_block" "resume_bucket_public_access" {
   bucket = aws_s3_bucket.resume_bucket.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
-# Static website hosting confirugation
-resource "aws_s3_bucket_website_configuration" "resume_bucket_website" {
-  bucket = aws_s3_bucket.resume_bucket.id
+# # Static website hosting confirugation **removed for better security, using CloudFront instead**
+# resource "aws_s3_bucket_website_configuration" "resume_bucket_website" {
+#   bucket = aws_s3_bucket.resume_bucket.id
 
-  index_document {
-    suffix = "index.html"
-  }
+#   index_document {
+#     suffix = "index.html"
+#   }
 
-  error_document {
-    key = "error.html"
-  }
-}
+#   error_document {
+#     key = "error.html"
+#   }
+# }
 
 # upload frontend files to S3 bucket
 resource "aws_s3_object" "resume_files" {

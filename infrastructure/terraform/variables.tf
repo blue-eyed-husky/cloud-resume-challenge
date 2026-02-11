@@ -31,3 +31,31 @@ variable "acm_certificate_arn" {
   description = "The ARN of the ACM certificate for the domain."
   type        = string
 }
+
+# Github thumbprint
+variable "github_oidc_thumbprint" {
+  description = "The ACM certificate thumbprint for github.com (used for ACM validation)."
+  type        = list
+}
+
+variable "github_owner" {
+  description = "The GitHub repository owner (used for ACM validation)."
+  type        = string
+}
+
+variable "github_repo" {
+  description = "The GitHub repository name (used for ACM validation)."
+  type        = string
+}
+
+variable "github_branch" {
+  description = "The GitHub repository branch (used for ACM validation)."
+  type        = string
+  default     = "main"
+}
+variable "visitor_table_name" {
+  description = "Name of the DynamoDB table for visitor tracking."
+  type        = string
+  default     = "resume_visitors"
+}
+
