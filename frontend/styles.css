@@ -1,6 +1,6 @@
 /* ===== Design Tokens ===== */
 :root {
-  --bg: hsl(0, 0%, 7%);
+  --bg: hsl(0, 0%, 27%);
   --card: #f5edde;
   --text: #1f2937;          /* slate-800 */
   --header: #181919;          /* slate-800 */
