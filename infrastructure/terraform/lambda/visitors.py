@@ -12,23 +12,9 @@ def handler(event, context):
     print("DEBUG_AWS_REGION:", region)
     print("DEBUG_VERSION: VISITORS-PY-UPDATED-2026-02-13")
 
+    ddb = boto3.resource("dynamodb", region_name=region)
+    table = ddb.Table(TABLE_NAME)
 
-    # Use an explicit region to eliminate any possibility of mismatch
-    ddb_client = boto3.client("dynamodb", region_name=region)
-    ddb_resource = boto3.resource("dynamodb", region_name=region)
-
-    # Print table schema as DynamoDB sees it right now
-    try:
-        desc = ddb_client.describe_table(TableName=TABLE_NAME)["Table"]
-        print("DEBUG_KeySchema:", desc.get("KeySchema"))
-        print("DEBUG_AttrDefs:", desc.get("AttributeDefinitions"))
-    except ClientError as e:
-        print("DEBUG_describe_table_error:", str(e))
-        raise
-
-    table = ddb_resource.Table(TABLE_NAME)
-
-    # Atomic increment
     try:
         resp = table.update_item(
             Key={"id": "home"},
