@@ -181,23 +181,42 @@
       Views: <span id="visitor-count">-</span>
     </div>
 
-    <script>
-      const API_BASE = "https://yk2wopkqx3.execute-api.us-west-1.amazonaws.com";
-      const endpoint = `${API_BASE}/visitors`;
+<script>
+  const API_BASE = "https://yk2wopkqx3.execute-api.us-west-1.amazonaws.com";
+  const endpoint = `${API_BASE}/visitors`;
 
-      async function loadCount() {
-        try {
-          const res = await fetch(endpoint, { cache: "no-store" });
-          const data = await res.json();
-          document.getElementById("visitor-count").textContent = data.count;
-        } catch (e) {
-          document.getElementById("visitor-count").textContent = "error";
-          console.error(e);
-        }
+  async function loadCount() {
+    const el = document.getElementById("visitor-count");
+
+    try {
+      const res = await fetch(endpoint, { cache: "no-store" });
+      const text = await res.text();
+
+      if (!res.ok) {
+        console.error("Visitor API HTTP error:", res.status, text);
+        el.textContent = `HTTP ${res.status}`;
+        return;
       }
 
-      loadCount();
-    </script>
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("Visitor API returned non-JSON:", text);
+        el.textContent = "bad-json";
+        return;
+      }
+
+      el.textContent = data.count;
+    } catch (e) {
+      console.error("Visitor API fetch failed:", e);
+      el.textContent = "fetch-failed";
+    }
+  }
+
+  loadCount();
+</script>
+
 
   </div>
 </body>
