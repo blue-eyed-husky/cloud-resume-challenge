@@ -96,7 +96,7 @@ resource "aws_apigatewayv2_api" "visitors_api" {
   protocol_type = "HTTP"
 
   cors_configuration {
-    allow_origins = ["http://${var.domain_name}"]
+    allow_origins = ["https://${var.domain_name}"]
     allow_methods = ["GET", "OPTIONS"]
     allow_headers = ["content-type"]
   }
