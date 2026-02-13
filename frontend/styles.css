@@ -162,6 +162,21 @@ li { margin: 6px 0; }
   }
 }
 
+/* ===== Visitor Counter ==== */
+.counter {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.counter #visitor-count {
+  color: var(--text);
+  font-weight: 650;
+  margine-left: 6px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   .container {
