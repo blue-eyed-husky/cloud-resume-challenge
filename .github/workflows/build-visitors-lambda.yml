@@ -1,0 +1,29 @@
+name: Build Visitors Lambda Zip
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "infrastructure/lambda/visitors/**"
+      - ".github/workflows/build-visitors-lambda.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install deps + zip
+        working-directory: infrastructure/lambda/visitors
+        run: |
+          npm ci
+          mkdir -p ../../build
+          zip -r ../../build/visitors.zip .
+
+      - name: Commit zip (CRC-simple approach)
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add infrastructure/build/visitors.zip
+          git commit -m "Build visitors lambda zip" || echo "No changes"
+          git push

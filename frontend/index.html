@@ -177,5 +177,27 @@
     </section>
 
   </div>
+  <div class="counter">
+    Views: <span id="visitor-count">-</span>
+  </div>
+
+  <script>
+  const API_BASE = "https://yk2wopkqx3.execute-api.us-west-1.amazonaws.com"
+  const endpoint = `${API_BASE}/visitors`;
+
+  async function loadCount() {
+    try {
+      const res = await fetch(endpoint, { cache: "no-store" });
+      const data = await res.json();
+      document.getElementById("visitor-count").textContent = data.count;
+    } catch (e) {
+      document.getElementById("visitor-count").textContent = "error";
+      console.error(e);
+    }
+  }
+
+  loadCount();
+</script>
+</div>
 </body>
 </html>

@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "github_assume_role_policy" {
     condition {
       test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values = ["repo:${var.github_owner}/${var.github_repo}:ref:refs/heads/${var.github_branch}"]
+      values   = ["repo:${var.github_owner}/${var.github_repo}:ref:refs/heads/${var.github_branch}"]
     }
 
     condition {
@@ -40,17 +40,17 @@ resource "aws_iam_role" "github_deploy_role" {
   name               = "github-deploy-role"
   assume_role_policy = data.aws_iam_policy_document.github_assume_role_policy.json
 
-    tags = {
-        "Project" = "ResumeWebsite"
-    }
+  tags = {
+    "Project" = "ResumeWebsite"
+  }
 }
 
 
 # Least-privilege policy: S3 sync and cloudfront invalidation
 data "aws_iam_policy_document" "github_deploy_policy" {
   statement {
-    effect = "Allow"
-    actions = ["s3:ListBucket"]
+    effect    = "Allow"
+    actions   = ["s3:ListBucket"]
     resources = [aws_s3_bucket.resume_bucket.arn]
   }
 
@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "github_deploy_policy" {
     ]
     resources = [
       "${aws_s3_bucket.resume_bucket.arn}/*",
-       aws_s3_bucket.resume_bucket.arn,
+      aws_s3_bucket.resume_bucket.arn,
     ]
   }
 

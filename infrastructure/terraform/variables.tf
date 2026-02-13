@@ -35,7 +35,7 @@ variable "acm_certificate_arn" {
 # Github thumbprint
 variable "github_oidc_thumbprint" {
   description = "The ACM certificate thumbprint for github.com (used for ACM validation)."
-  type        = list
+  type        = list(any)
 }
 
 variable "github_owner" {
