@@ -56,11 +56,12 @@ resource "aws_iam_role_policy" "lambda_ddb_inline" {
   policy = data.aws_iam_policy_document.lambda_ddb.json
 }
 
-# Lambda fucntion (python) #
+# Lambda function (python) #
 data "archive_file" "visitors_lambda_zip" {
   type = "zip"
   source_file = "${path.module}/lambda/visitors.py"
   output_path = "${path.module}/lambda/visitors.zip"
+
 }
 
 # Deploying lambda to use built zip #
@@ -74,6 +75,8 @@ resource "aws_lambda_function" "resume_visitors" {
 
   filename         = data.archive_file.visitors_lambda_zip.output_path
   source_code_hash = data.archive_file.visitors_lambda_zip.output_base64sha256
+
+  publish = true
 
   environment {
     variables = {

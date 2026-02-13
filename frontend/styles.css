@@ -174,7 +174,7 @@ li { margin: 6px 0; }
 .counter #visitor-count {
   color: var(--text);
   font-weight: 650;
-  margine-left: 6px;
+  margin-left: 6px;
 }
 
 /* ===== Responsive ===== */
