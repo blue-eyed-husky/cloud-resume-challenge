@@ -8,9 +8,6 @@ ALLOW_ORIGIN = os.environ.get("ALLOW_ORIGIN", "*")
 
 def handler(event, context):
     region = os.environ.get("AWS_REGION")
-    print("DEBUG_TABLE_NAME:", TABLE_NAME)
-    print("DEBUG_AWS_REGION:", region)
-    print("DEBUG_VERSION: VISITORS-PY-UPDATED-2026-02-13")
 
     ddb = boto3.resource("dynamodb", region_name=region)
     table = ddb.Table(TABLE_NAME)
